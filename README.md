@@ -1,19 +1,23 @@
 Projekt zawiera test procesu akceptacji ciasteczek analitycznych na stronie ing.pl.
 
 1. Instrukcja uruchomienia lokalnego
+   
 Aby uruchomić testy na swoim komputerze, wykonaj kolejno poniższe komendy w terminalu:
 
 Krok 1: Instalacja niezbędnych bibliotek i przeglądarek
+
 pip install -r requirements.txt
 playwright install
 
 Krok 2: Uruchomienie testu w wielu przeglądarkach jednocześnie
+
 Zgodnie z wymaganiami niefunkcjonalnymi, testy należy uruchomić komendą:
 pytest test_ing.py --browser chromium --browser firefox
 
 Domyślnie testy uruchamiają się w tle. Aby zaobserwować proces klikania na żywo, należy dodać parametr --headed
 
 2. Opis rozwiązania
+   
 Technologia: Python + Playwright.
 
 A. Weryfikacja (pkt 5 w zadaniu): 
