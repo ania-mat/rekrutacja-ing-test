@@ -32,5 +32,9 @@ def test_ing_accept_analytical_cookies(page: Page):
         assert len(cookies) > 0, "Błąd: Przeglądarka nie zapisała żadnych ciasteczek."
 
     except Exception as e:
-        print("TimeoutError czyli Anti-Bot na serwerze CI.")
+        if "Timeout" in str(e):
+            print("\n Nie odnaleziono elementu w wyznaczonym czasie.")
+            print("Możliwe przyczyny: Blokada Anti-Bot / Zmiana struktury strony.")
+        else:
+            print(f"\n Wystąpił nieoczekiwany błąd: {e}")
         raise e
