@@ -14,7 +14,7 @@ def context_args(context_args):
 
 def test_ing_accept_analytical_cookies(page: Page):
     page.set_extra_http_headers({
-        "Accept-Language": "pl-PL,pl;q=0.9,en-US;q=0.8,en;q=0.7"
+        "Accept-Language": "pl-PL,pl;q=0.9"
     })
     page.goto("https://www.ing.pl/", wait_until="networkidle", timeout=60000)
     
