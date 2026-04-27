@@ -17,7 +17,9 @@ def test_ing_accept_analytical_cookies(page: Page):
         "Accept-Language": "pl-PL,pl;q=0.9"
     })
     page.goto("https://www.ing.pl/", wait_until="networkidle", timeout=60000)
-    
+
+    initial_cookies_count = len(page.context.cookies())
+
     try:
         dostosuj_btn = page.get_by_role("button", name=re.compile(r"Dostosuj", re.IGNORECASE))
         expect(dostosuj_btn).to_be_visible(timeout=15000)
@@ -28,8 +30,10 @@ def test_ing_accept_analytical_cookies(page: Page):
         accept_btn.click()
         page.wait_for_timeout(2000)
         expect(dostosuj_btn).not_to_be_visible()
-        cookies = page.context.cookies()
-        assert len(cookies) > 0, "Błąd: Przeglądarka nie zapisała żadnych ciasteczek."
+        final_cookies = page.context.cookies()
+        final_cookies_count = len(final_cookies)
+        assert final_cookies_count > initial_cookies_count, \
+            f"Błąd: Liczba ciasteczek nie wzrosła. Przed: {initial_cookies_count}, Po: {final_cookies_count}"
 
     except Exception as e:
         if "Timeout" in str(e):
